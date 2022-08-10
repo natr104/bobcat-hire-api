@@ -75,6 +75,10 @@ GEM
       activesupport
     concurrent-ruby (1.1.10)
     crass (1.0.6)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     erubi (1.10.0)
     faker (2.22.0)
       i18n (>= 1.8.11, < 2)
@@ -165,6 +169,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   cancancan
+  dotenv-rails (~> 2.8)
   faker
   jwt (~> 2.4)
   listen (~> 3.3)

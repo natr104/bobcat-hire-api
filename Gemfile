@@ -45,3 +45,4 @@ gem "jwt", "~> 2.4"
 gem 'cancancan'
 gem 'active_model_serializers'
 gem 'faker'
+gem "dotenv-rails", "~> 2.8", groups: [:development, :test]
