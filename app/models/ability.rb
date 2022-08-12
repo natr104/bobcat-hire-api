@@ -29,8 +29,9 @@ class Ability
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/blob/develop/docs/define_check_abilities.md
     return unless user.present?
-      can [:manage], Job, user: user
-      can [:read], Quote, user: user
+      can [:read, :update, :create, :delete], Job, user: user
+      can :read, Quote, job: { user_id: user.id }
+      can :read, Category
     
     return unless user.admin?
       can :manage, :all
