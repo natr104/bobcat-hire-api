@@ -6,7 +6,12 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :users
+      resources :users do
+        resources :jobs
+      end
+      resources :jobs
+      resources :quotes
+      resources :categories
       post '/login', to: 'auth#create'
       get '/profile', to: 'users#show'
     end

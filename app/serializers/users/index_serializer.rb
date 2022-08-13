@@ -1,2 +1,3 @@
-class Users::IndexSerializer < UserSerializer
+class Users::IndexSerializer < Users::UserSerializer
+    root 'users'
 end

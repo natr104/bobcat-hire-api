@@ -1,24 +1,26 @@
 class Api::V1::JobsController < ApplicationController
   before_action :set_job, only: [:show, :update, :destroy]
 
+
   # GET /jobs
   def index
     @jobs = Job.all
 
-    render json: @jobs
+    render json: @jobs, each_serializer: Jobs::JobSerializer
   end
 
   # GET /jobs/1
   def show
-    render json: @job
+    render json: @job, serializer: Jobs::ShowSerializer
   end
 
   # POST /jobs
   def create
-    @job = Job.new(job_params)
+    # @job = Job.new(job_params)
+    @job = current_user.jobs.build(job_params)
 
     if @job.save
-      render json: @job, status: :created, location: @job
+      render json: @job, namespace: API::V1, status: :created
     else
       render json: @job.errors, status: :unprocessable_entity
     end
@@ -46,6 +48,6 @@ class Api::V1::JobsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def job_params
-      params.require(:job).permit(:address, :date, :time, :comment, :status)
+      params.require(:job).permit(:address, :date_time, :comment, :status, :category_id, :user_id)
     end
 end
