@@ -6,12 +6,12 @@ class Api::V1::JobsController < ApplicationController
   def index
     @jobs = Job.all
 
-    render json: @jobs, each_serializer: Jobs::JobSerializer
+    render json: @jobs
   end
 
   # GET /jobs/1
   def show
-    render json: @job, serializer: Jobs::ShowSerializer
+    render json: @Job
   end
 
   # POST /jobs
@@ -20,7 +20,7 @@ class Api::V1::JobsController < ApplicationController
     @job = current_user.jobs.build(job_params)
 
     if @job.save
-      render json: @job, namespace: API::V1, status: :created
+      render json: @job, status: :created
     else
       render json: @job.errors, status: :unprocessable_entity
     end

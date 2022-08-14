@@ -7,12 +7,12 @@ class Api::V1::UsersController < ApplicationController
   def index
     @users = User.all
 
-    render json: @users, each_serializer: Users::UserSerializer
+    render json: @users
   end
 
   # GET /users/1
   def show
-    render json: @user, serializer: Users::UserSerializer
+    render json: @user
   end
 
   # POST /users
@@ -21,7 +21,7 @@ class Api::V1::UsersController < ApplicationController
 
     if @user.save
       @token = encode_token(user_id: @user.id)
-      render json: { user: Users::UserSerializer.new(@user), jwt: @token }, status: :created
+      render json: { user: Api::V1::UserSerializer.new(@user), jwt: @token }, status: :created
     else
       render json: @user.errors, status: :unprocessable_entity
     end
