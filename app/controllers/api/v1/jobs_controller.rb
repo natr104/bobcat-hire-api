@@ -4,7 +4,11 @@ class Api::V1::JobsController < ApplicationController
 
   # GET /jobs
   def index
-    @jobs = Job.all
+    if params[:user_id]
+      @jobs = User.find(params[:user_id]).jobs
+    else
+      @jobs = Job.all
+    end
 
     render json: @jobs
   end
