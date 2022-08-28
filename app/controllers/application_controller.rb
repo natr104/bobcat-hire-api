@@ -38,6 +38,10 @@ class ApplicationController < ActionController::API
         !!current_user
     end
 
+    def admin?
+        current_user[:admin]
+    end
+
     def authorized
         render json: { message: 'Please log in' }, status: :unauthorized unless logged_in?
     end  
