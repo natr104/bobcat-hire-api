@@ -15,7 +15,9 @@ class Api::V1::QuotesController < ApplicationController
 
   # POST /quotes
   def create
-    @quote = Quote.new(quote_params)
+    # @quote = Quote.new(quote_params)
+    job = Job.find(params[:job_id])
+    @quote = job.quote.build(quote_params)
 
     if @quote.save
       render json: @quote, status: :created, location: @quote
