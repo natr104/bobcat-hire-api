@@ -5,8 +5,9 @@ class Api::V1::JobsController < ApplicationController
   # GET /jobs
   def index
     if (params[:user_id])
-      if (current_user.id == params[:user_id] || admin?)
-        @jobs = User.find(params[:user_id]).jobs
+      id = params[:user_id].to_i
+      if (current_user.id == id || admin?)
+        @jobs = User.find(id).jobs
         render json: @jobs
       else
         render json: { message: 'Unauthorised' }, status: :forbidden
